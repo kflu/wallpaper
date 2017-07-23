@@ -69,7 +69,7 @@
   (define (get-random-image)
     (let* ([img-url (get-random-image-url)]
            [img-path (get-random-img-file-name)])
-      (make-directory (path-only img-path))
+      (unless (directory-exists? (path-only img-path)) (make-directory (path-only img-path)))
       (imgurl->port img-url (λ (port) (port->file port img-path)))
       img-path))
 
